@@ -1,0 +1,10 @@
+# Ignore .DS_Store files on OS X
+.DS_Store
+
+# Ws
+.idea
+
+#Project
+node_modules/
+npm-debug.log
+
