@@ -1,9 +1,11 @@
 'use strict';
 
-const NODE_ENV = process.env.NODE_ENV || 'dev';
+const NODE_ENV = process.env.NODE_ENV || 'development';
 const webpack = require('webpack');
 
-let isDev = () => {return NODE_ENV === 'dev'};
+let isDev = () => {return NODE_ENV === 'development'};
+
+process.env.BABEL_ENV = NODE_ENV;
 
 module.exports = {
     entry: './src/index',
@@ -35,6 +37,10 @@ module.exports = {
     plugins: [
         new webpack.DefinePlugin({
             isDevEnv: JSON.stringify(isDev())
-        })
-    ]
+        }),
+        new webpack.NoErrorsPlugin()
+    ],
+    devServer: {
+        port: 3000
+    }
 };
