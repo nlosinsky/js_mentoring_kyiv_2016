@@ -1,0 +1,6 @@
+[8/9/2016 - Lena]
+1) Describe step by step in readme how to  build the project and start the  server - prod and dev
+2) Add eslint config
+3) Think about using css preprocessor (optional)
+4) Add dist folder to .gitignore
+
