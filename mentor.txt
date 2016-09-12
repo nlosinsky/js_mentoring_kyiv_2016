@@ -4,3 +4,9 @@
 3) Think about using css preprocessor (optional)
 4) Add dist folder to .gitignore
 
+
+[8/9/2016 - Mykola]
+1) done
+2) done
+3) I decided to use PostCSS instead of preprocessors, as it becomes more efficient and handy.
+4) done
