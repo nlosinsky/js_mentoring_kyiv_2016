@@ -10,3 +10,11 @@
 2) done
 3) I decided to use PostCSS instead of preprocessors, as it becomes more efficient and handy.
 4) done
+
+[17/9/2016 - Liza]
+1. Since you've started to use ES6 in the previous homework I suggest to use it further.
+For example, arrow functions, property shorthand, destructuring etc.
+2. It's better to store all constants (e.g. 'isObservable', 'change', '[data-bind]' etc) as variables at the top of your code.
+It's useful during your code maintenance.
+3. Just a suggestion: try to use TDD during development.
+It's very useful and helps other developers to understand what your code does.
