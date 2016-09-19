@@ -1,69 +1,100 @@
-(function() {
-    'use strict';
+const DEFAULTS = {
+    SELECTORS: {
+        BIND: '[data-bind]'
+    },
+    PROPERTIES: {
+        IS_OBSERVABLE: 'isObservable'
+    },
+    EVENTS: {
+        CHANGE: 'change'
+    },
+    NODE_TYPES: {
+        TEXT: 'text',
+        VALUE: 'value'
+    }
+};
 
-    function Sync() {
+class Sync {
+    constructor() {
         this.bindNodes = [];
         this.observers = {};
         this.model = {};
         this.callbacks = [];
     }
 
-    Sync.prototype._findBindNodes = function() {
-        this.bindNodes = document.querySelectorAll('[data-bind]');
+    _findBindNodes() {
+        this.bindNodes = document.querySelectorAll(DEFAULTS.SELECTORS.BIND);
 
         return this;
-    };
+    }
 
-    Sync.prototype._parseBindNodesData = function() {
-        var self = this;
+    _parseBindNodesData() {
 
-        self.bindNodes.forEach(function(node) {
-            var attrStr = node.dataset.bind;
-            var attrArr = attrStr.split(':');
+        this.bindNodes.forEach((node) => {
+            let attrStr = node.dataset.bind;
+            let attrArr = attrStr.split(':');
 
             if (attrArr.length !== 2) {
-                throw new Error('Wrong `data-bind` values');
+                throw new Error(`Wrong ${DEFAULTS.SELECTORS.BIND} values`);
             }
 
-            var bindType = attrArr[0].trim();
-            var bindKey = attrArr[1].trim();
-            var obj = {
+            let [bindType, bindKey] = attrArr.map((el) => el.trim());
+            let obj = {
                 key: bindKey,
                 type: bindType,
-                node: node
+                node
             };
 
-            if (!self.observers[bindKey]) {
-                self.observers[bindKey] = [];
-                self.observers[bindKey].push(obj);
+            if (!this.observers[bindKey]) {
+                this.observers[bindKey] = [];
+                this.observers[bindKey].push(obj);
             } else {
-                var alreadyHasNode = self.observers[bindKey].some(function(el) {
-                    return el.node === obj.node;
-                });
+                let alreadyHasNode = this.observers[bindKey].some((el) => el.node === obj.node);
 
                 if (!alreadyHasNode) {
-                    self.observers[bindKey].push(obj);
+                    this.observers[bindKey].push(obj);
                 }
             }
         });
 
         return this;
-    };
+    }
 
-    Sync.prototype._bindingHandlers = function(model, except) {
-        var self = this;
+    _bindingHandlers(model, except) {
+        let self = this;
 
-        Object.assign(self.model, model);
+        Object.assign(this.model, model);
 
-        Object.keys(self.observers).forEach(function(key) {
-            if (!self.model.hasOwnProperty(key)) {
+        Object.keys(this.observers).forEach((key) => {
+            if (!this.model.hasOwnProperty(key)) {
                 return;
             }
 
-            var modelItem = self.model[key];
-            var modelValue = modelItem;
+            let modelItem = this.model[key];
+            let modelValue = modelItem;
+            let _actionWhenItemIsObservable = () => {
+                modelValue = modelItem.value;
 
-            if (modelItem && modelItem.hasOwnProperty('isObservable')) {
+                this.model[key] = (param) => {
+                    if (param === undefined) {
+                        return modelValue;
+                    } else {
+                        modelValue = param;
+                        this.applyBindings(this.model);
+                    }
+                };
+
+                this.model[key] = Object.setPrototypeOf(this.model[key], {
+                    [DEFAULTS.PROPERTIES.IS_OBSERVABLE]: true,
+                    subscribe(cb) {
+                        self.callbacks.push([cb, key]);
+                    }
+                });
+
+                Object.assign(model, this.model);
+            };
+
+            if (modelItem && modelItem.hasOwnProperty(DEFAULTS.PROPERTIES.IS_OBSERVABLE)) {
                 _actionWhenItemIsObservable();
             }
 
@@ -71,50 +102,25 @@
                 modelValue = modelValue();
             }
 
-            _applyDataToView();
-
-
-            function _actionWhenItemIsObservable() {
-                modelValue = modelItem.value;
-
-                self.model[key] = function(param) {
-                    if (param === undefined) {
-                        return modelValue;
-                    } else {
-                        modelValue = param;
-                        self.applyBindings(self.model);
-                    }
-                };
-
-                self.model[key] = Object.setPrototypeOf(self.model[key], {
-                    isObservable: true,
-                    subscribe: function(cb) {
-                        self.callbacks.push([cb, key]);
-                    }
-                });
-
-                Object.assign(model, self.model);
-            }
-
-            function _applyDataToView() {
-                self.observers[key].forEach(function(bindObj, i) {
+            let _applyDataToView = () => {
+                this.observers[key].forEach((bindObj, i) => {
 
                     if (bindObj.node === except) {
                         return;
                     }
 
                     switch (bindObj.type) {
-                        case 'text':
+                        case DEFAULTS.NODE_TYPES.TEXT:
                             bindObj.node.textContent = modelValue;
                             break;
 
-                        case 'value':
+                        case DEFAULTS.NODE_TYPES.VALUE:
                             bindObj.node.value = modelValue;
 
-                            if (bindObj.event !== 'change') {
-                                bindObj.event = 'change';
+                            if (bindObj.event !== DEFAULTS.EVENTS.CHANGE) {
+                                bindObj.event = DEFAULTS.EVENTS.CHANGE;
 
-                                self.addListener(bindObj.type, key, i);
+                                this.addListener(bindObj.type, key, i);
                             }
                             break;
 
@@ -125,43 +131,48 @@
                             break;
                     }
                 });
-            }
+            };
+
+            _applyDataToView();
         });
 
         return this;
-    };
+    }
 
-    Sync.prototype.addListener = function(nodeType, observerKey, observerIndex) {
-        var self = this;
-
-        if (nodeType === 'value') {
-            var node = self.observers[observerKey][observerIndex].node;
-            var _inputOnChangeHandler = function(e) {
-                var elem = e.srcElement;
-                var currModel = {};
+    addListener(nodeType, observerKey, observerIndex) {
+        if (nodeType === DEFAULTS.NODE_TYPES.VALUE) {
+            let node = this.observers[observerKey][observerIndex].node;
+            let _inputOnChangeHandler = (e) => {
+                let elem = e.srcElement;
+                let currModel = {};
 
                 currModel[observerKey] = elem.value;
 
-                self.applyBindings(currModel, elem);
+                this.applyBindings(currModel, elem);
             };
 
-            node.addEventListener('change', _inputOnChangeHandler);
+            node.addEventListener(DEFAULTS.EVENTS.CHANGE, _inputOnChangeHandler);
         }
-    };
+    }
 
-    Sync.prototype._executeCallbacks = function() {
-        var self = this;
+    _executeCallbacks() {
 
-        this.callbacks.forEach(function(cbArr) {
-            var cb = cbArr[0];
-            var key = cbArr[1];
-            var value = self.model[key];
+        this.callbacks.forEach((cbArr) => {
+            let [cb, key] = cbArr;
+            let value = this.model[key];
 
             cb(value);
         });
-    };
+    }
 
-    Sync.prototype.applyBindings = function(model, exclude) {
+    observable(value) {
+        return {
+            [DEFAULTS.PROPERTIES.IS_OBSERVABLE]: true,
+            value
+        }
+    }
+
+    applyBindings(model, exclude) {
         this
             ._findBindNodes()
             ._parseBindNodesData()
@@ -169,14 +180,7 @@
             ._executeCallbacks();
 
         return this;
-    };
+    }
+}
 
-    Sync.prototype.observable = function(value) {
-        return {
-            isObservable: true,
-            value: value
-        }
-    };
-
-    window.sync = new Sync();
-})();
+module.exports = new Sync();

@@ -4,12 +4,12 @@
 3) Think about using css preprocessor (optional)
 4) Add dist folder to .gitignore
 
-
 [8/9/2016 - Mykola]
 1) done
 2) done
 3) I decided to use PostCSS instead of preprocessors, as it becomes more efficient and handy.
 4) done
+
 
 [17/9/2016 - Liza]
 1. Since you've started to use ES6 in the previous homework I suggest to use it further.
@@ -18,3 +18,8 @@ For example, arrow functions, property shorthand, destructuring etc.
 It's useful during your code maintenance.
 3. Just a suggestion: try to use TDD during development.
 It's very useful and helps other developers to understand what your code does.
+
+[19/9/2016 - Mykola]
+1. done
+2. done
+3. Thanks for the suggestion, I'll try to implement it in future.
