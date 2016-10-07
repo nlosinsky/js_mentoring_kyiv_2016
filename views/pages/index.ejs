@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/head.ejs %>
+</head>
+<body class="container">
+
+<header>
+    <% include ../partials/header.ejs %>
+</header>
+
+<main>
+    <div class="jumbotron text-center">
+        <% if (auth.success) { %>
+            <p >Welcome!</p>
+        <% } else { %>
+            <p>You are not authorized! Please, <a href="/api/auth/login">Log in</a> or <a href="/api/auth/signup">Sign up</a>.</p>
+        <% } %>
+    </div>
+</main>
+
+<footer>
+    <% include ../partials/footer.ejs %>
+</footer>
+
+</body>
+</html>
