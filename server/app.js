@@ -1,6 +1,9 @@
 'use strict';
 
-process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+const CONST = require('./constants/constants');
+const DICTIONARY = require('./constants/dictionary');
+
+process.env.NODE_ENV = process.env.NODE_ENV || CONST.ENV.DEV;
 require('colors');
 
 const express = require('express');
@@ -13,7 +16,7 @@ const path = require('path');
 db.connect();
 
 //set secret for JWT authorization
-app.set('superSecret', config.secret);
+app.set(CONST.TOKEN.SECRET.KEY, config.secret);
 
 //setup template engine settings
 app.set('view engine', 'ejs');
@@ -26,5 +29,5 @@ require('./routing/routes')(app);
 
 // Start server
 app.listen(config.port, () => {
-  console.log(`Express server listening on ${config.port}, in ${app.get('env')} mode`.cyan);
+  console.log(DICTIONARY.PARAMS.SERVER.LISTENING(config.port, app.get('env')).cyan);
 });

@@ -1,7 +1,7 @@
 'use strict';
 
 const mongodbUri = require('mongodb-uri');
-const uri =  mongodbUri.formatMongoose({
+const uri = mongodbUri.formatMongoose({
   scheme: 'mongodb',
   hosts: [
     {
@@ -15,9 +15,6 @@ const uri =  mongodbUri.formatMongoose({
 });
 
 module.exports = {
-  port:     process.env.PORT || 8080,
-
-  // MongoDB connection options
   mongo: {
     uri: uri
   }
