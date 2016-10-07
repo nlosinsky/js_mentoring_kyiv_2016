@@ -23,3 +23,8 @@ It's very useful and helps other developers to understand what your code does.
 1. done
 2. done
 3. Thanks for the suggestion, I'll try to implement it in future.
+
+[10/7/2016 - Liza]
+1. Stylistic minor: please use brackets arround single parameter in arrow functions.
+2. Please move string constants to top of your code. 
+3. Make password encrypted - it's necessary for authentication functionality. 
