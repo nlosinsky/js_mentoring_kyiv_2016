@@ -6,12 +6,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "install:global": "npm i -g webpack webpack-dev-server",
     "setup": "npm run install:global && npm install",
-    "start:prod": "cross-env NODE_ENV=production webpack-dev-server",
-    "start:dev": "cross-env NODE_ENV=development webpack-dev-server",
-    "build:prod": "cross-env NODE_ENV=production webpack",
-    "build:dev": "cross-env NODE_ENV=development webpack",
-    "server:start": "node server/app.js",
-    "server:watch": "nodemon server/app.js"
+    "start": "webpack-dev-server",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -20,24 +16,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bcrypt": "^0.8.7",
-    "body-parser": "^1.15.2",
-    "colors": "^1.1.2",
-    "cookie-parser": "^1.4.3",
-    "cross-env": "^2.0.1",
-    "dotenv": "^2.0.0",
-    "ejs": "^2.5.2",
-    "errorhandler": "^1.4.3",
-    "express": "^4.14.0",
-    "jsonwebtoken": "^7.1.9",
-    "kiwi-api": "^0.3.0",
-    "method-override": "~1.0.0",
-    "mongodb-uri": "^0.9.7",
-    "mongoose": "^4.6.2",
-    "morgan": "^1.7.0",
-    "multer": "^1.2.0",
-    "promise": "^7.1.1",
-    "unirest": "^0.5.1",
     "webpack": "^1.13.2"
   },
   "devDependencies": {
