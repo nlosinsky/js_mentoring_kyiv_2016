@@ -12,7 +12,7 @@ dotenv.config({path: envPath});
 // ============================================
 let all = {
   env: process.env.NODE_ENV,
-  root: path.normalize(__dirname + '/../../..'),
+  root: path.join(path.dirname(require.main.filename), '../'),
   port: process.env.PORT || CONST.SERVER.PORT,
   ip: process.env.IP || CONST.SERVER.DEFAULT_IP,
   secret: CONST.TOKEN.SECRET.VALUE,

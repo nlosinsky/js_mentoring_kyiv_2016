@@ -1,0 +1,65 @@
+<header class="header">
+    <nav class="navbar navbar--header">
+        <a href="/" class="navbar__logo">
+            <i class="navbar__logo-img fa" aria-hidden="true"></i>
+            <span class="navbar__logo-text">Home</span>
+        </a>
+        <% if (auth.success) { %>
+            <div class="navbar__menu">
+                <ul class="navbar__menu-items">
+                    <li class="navbar__menu-item">
+                        <a class="navbar__menu-link text-grey" href="/api/tickets">Available Tickets</a>
+                    </li>
+                    <li class="navbar__menu-item">
+                        <a class="navbar__menu-link text-grey" href="/api/tickets/my">My Tickets</a>
+                    </li>
+                    <li class="navbar__menu-item">
+                        <a class="navbar__menu-link text-grey" id="logoutBtn" href="#">Log Out <b>(<%= auth.user.username %>)</b> </a>
+                    </li>
+                </ul>
+            </div>
+        <% } else  { %>
+            <div class="navbar__menu">
+                <ul class="navbar__menu-items">
+                    <li class="navbar__menu-item">
+                        <a class="navbar__menu-link text-grey" href="/api/auth/login">Log In</a>
+                    </li>
+                    <li class="navbar__menu-item">
+                        <a class="navbar__menu-link text-grey" href="/api/auth/signup">Sign Up</a>
+                    </li>
+                </ul>
+            </div>
+        <% } %>
+    </nav>
+</header>
+
+<script>
+    (() => {
+        'use strict';
+
+        let logoutBtn = document.getElementById('logoutBtn');
+
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+
+                document.cookie = "accessToken=; Max-Age=0; path=/";
+                window.location.pathname = '/';
+                window.location.reload();
+            }, false);
+        }
+    })();
+
+    (() => {
+      'use strict';
+
+      let nav = document.querySelector('.navbar__menu');
+
+      nav.addEventListener('click', (e) => {
+        if (e.srcElement === nav){
+          e.preventDefault();
+          e.srcElement.classList.toggle('navbar__menu--active')
+        }
+      }, false);
+    })();
+</script>

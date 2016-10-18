@@ -10,10 +10,18 @@ const KiwiAPI = new Kiwi();
 const User = require('../../models/user.model.js');
 
 exports.getAvailableTickets = (req, res) => {
+  if (!req.auth.success) {
+    res.redirect('/');
+  }
+
   KiwiAPI.flights({
     limit: 10
   })
     .then((places) => {
+
+      dateFormatter(places.data, 'dTimeUTC');
+      dateFormatter(places.data, 'aTimeUTC');
+
       res.render(
         path.join(app.get('views'), 'tickets.list.ejs'),
         {
@@ -31,6 +39,10 @@ exports.getAvailableTickets = (req, res) => {
 };
 
 exports.addUserTicket = (req, res) => {
+  if (!req.auth.success) {
+    res.redirect('/');
+  }
+
   return User
     .findById(req.auth.user._id)
     .then((modelInstance, err) => {
@@ -65,6 +77,10 @@ exports.addUserTicket = (req, res) => {
 };
 
 exports.getUserTickets = (req, res) => {
+  if (!req.auth.success) {
+    res.redirect('/');
+  }
+
   return User
     .findById(req.auth.user._id)
     .then((user, err) => {
@@ -88,3 +104,22 @@ exports.getUserTickets = (req, res) => {
         .json(err);
     });
 };
+
+
+/**
+ *
+ * @param {Object} resp
+ * @param {String} field
+ * @return {Object} ticket
+ *
+ * @description format date from timestamp to locale datetime
+ */
+function dateFormatter(resp, field) {
+  resp.map((ticket) => {
+    let date = new Date(ticket[field] * 1000);
+
+    ticket[field] = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+
+    return ticket;
+  });
+}

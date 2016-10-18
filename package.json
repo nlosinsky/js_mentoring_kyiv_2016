@@ -29,6 +29,7 @@
     "ejs": "^2.5.2",
     "errorhandler": "^1.4.3",
     "express": "^4.14.0",
+    "font-awesome": "^4.6.3",
     "jsonwebtoken": "^7.1.9",
     "kiwi-api": "^0.3.0",
     "method-override": "~1.0.0",
@@ -36,6 +37,8 @@
     "mongoose": "^4.6.2",
     "morgan": "^1.7.0",
     "multer": "^1.2.0",
+    "normalize.css": "^5.0.0",
+    "postcss-nested-ancestors": "0.0.1",
     "promise": "^7.1.1",
     "unirest": "^0.5.1",
     "webpack": "^1.13.2"
