@@ -38,3 +38,8 @@ It's very useful and helps other developers to understand what your code does.
 1. Please move style 'display:none' to css file.
 2. Update readme file.
 3. Check UI support in other browser, e.g. Safari.
+
+[10/18/2016 - Mykola]
+1. done
+2. done
+3. done

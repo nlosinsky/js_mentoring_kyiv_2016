@@ -9,7 +9,7 @@
 
     <main class="main">
         <div class="info-unit">
-            <div class="notification notification__error" style="display: none;" id="errorBlock">
+            <div class="notification notification__error hidden" id="errorBlock">
                 <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
                 <span>Error:</span>
                 <span class="notification__message"></span>
@@ -37,25 +37,25 @@
     <% include ../partials/footer.ejs %>
 
     <script>
-        (() => {
+        (function() {
             'use strict';
 
-            let form = document.getElementById('signupForm');
-            let errorBlock = document.getElementById('errorBlock');
+            var form = document.getElementById('signupForm');
+            var errorBlock = document.getElementById('errorBlock');
 
-            form.addEventListener('submit', (e) => {
+            form.addEventListener('submit', function(e) {
                 e.preventDefault();
 
-                let data = new FormData(form);
-                let ajax = new XMLHttpRequest();
+                var data = new FormData(form);
+                var ajax = new XMLHttpRequest();
 
-                ajax.onreadystatechange = () => {
+                ajax.onreadystatechange = function() {
                     if (ajax.readyState === 4) {
-                        let response = JSON.parse(ajax.responseText);
+                        var response = JSON.parse(ajax.responseText);
 
                         if (response.success) {
                             errorBlock.style.display = 'none';
-                            document.cookie = `accessToken=${response.token};path=/`;
+                            document.cookie = 'accessToken=' + response.token + ';path=/';
                             location.pathname = '/';
                         } else {
                             errorBlock.querySelector('.notification__message').innerText = response.message;

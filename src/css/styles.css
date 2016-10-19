@@ -9,6 +9,10 @@ a {
   color: #428BCA;
 }
 
+.hidden {
+  display: none;
+}
+
 .container {
   width: 100%;
   max-width: 1280px;
@@ -296,7 +300,7 @@ a {
       padding: 5px 0;
       background: #EEE;
       text-align: center;
-      z-index: 10;
+      z-index: 1;
       position: relative;
     }
   }
@@ -384,7 +388,7 @@ a {
         background-color: #F0F0F0;
         top: 34px;
         border-bottom: 1px solid #999;
-        z-index: 1;
+        z-index: 10;
       }
 
       &-item {

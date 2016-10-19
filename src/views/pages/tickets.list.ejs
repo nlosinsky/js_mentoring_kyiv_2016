@@ -8,7 +8,7 @@
     <% include ../partials/header.ejs %>
 
     <main class="main">
-        <div class="notification notification__success" style="display:none;" id="successBlock" >
+        <div class="notification notification__success hidden" id="successBlock" >
             <i class="fa fa-check-circle" aria-hidden="true"></i>
             <span class="notification__message"></span>
         </div>
@@ -50,26 +50,26 @@
     <% include ../partials/footer.ejs %>
 
     <script>
-        (() => {
+        (function() {
             'use strict';
 
-            let buttons = document.getElementsByClassName('btn--buy-ticket');
-            let successBlock = document.getElementById('successBlock');
+            var buttons = document.getElementsByClassName('btn--buy-ticket');
+            var successBlock = document.getElementById('successBlock');
 
-            for (let i = 0; i < buttons.length; i++ ) {
-                buttons[i].addEventListener('click', (e) => {
-                    let ticket = e.srcElement.dataset.ticket;
-                    let ajax = new XMLHttpRequest();
+            for (var i = 0; i < buttons.length; i++ ) {
+                buttons[i].addEventListener('click', function(e) {
+                    var ticket = e.srcElement.dataset.ticket;
+                    var ajax = new XMLHttpRequest();
 
-                    ajax.onreadystatechange = () => {
+                    ajax.onreadystatechange = function() {
                         if (ajax.readyState === 4) {
-                            let response = JSON.parse(ajax.responseText);
+                            var response = JSON.parse(ajax.responseText);
 
                             if (response.success) {
                                 successBlock.querySelector('.notification__message').innerText = response.message;
                                 successBlock.style.display = 'block';
 
-                                setTimeout(() => {
+                                setTimeout(function() {
                                     successBlock.style.display = 'none';
                                 }, 3000);
                             } else {

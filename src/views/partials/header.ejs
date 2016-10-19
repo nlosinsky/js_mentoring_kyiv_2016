@@ -34,13 +34,13 @@
 </header>
 
 <script>
-    (() => {
+    (function() {
         'use strict';
 
-        let logoutBtn = document.getElementById('logoutBtn');
+        var logoutBtn = document.getElementById('logoutBtn');
 
         if (logoutBtn) {
-            logoutBtn.addEventListener('click', (e) => {
+            logoutBtn.addEventListener('click', function(e) {
                 e.preventDefault();
 
                 document.cookie = "accessToken=; Max-Age=0; path=/";
@@ -50,15 +50,15 @@
         }
     })();
 
-    (() => {
+    (function() {
       'use strict';
 
-      let nav = document.querySelector('.navbar__menu');
+      var nav = document.querySelector('.navbar__menu');
 
-      nav.addEventListener('click', (e) => {
-        if (e.srcElement === nav){
+      nav.addEventListener('click', function(e) {
+        if (e.target === nav){
           e.preventDefault();
-          e.srcElement.classList.toggle('navbar__menu--active')
+          e.target.classList.toggle('navbar__menu--active')
         }
       }, false);
     })();
