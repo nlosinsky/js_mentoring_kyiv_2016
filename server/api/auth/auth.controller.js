@@ -6,11 +6,7 @@ const DICTIONARY = require('../../constants/dictionary');
 const User = require('../../models/user.model.js');
 const jwt = require('jsonwebtoken');      //TODO rewrite using passport-jwt
 const app = require('../../app');
-const path = require('path');
-
-exports.getLoginPage = (req, res) => {
-  res.render(path.join(app.get('views'), 'login.ejs'), {auth: req.auth});
-};
+const authService = require('../../services/authStatus');
 
 exports.performLogin = (req, res) => {
   return User.findOne({
@@ -70,10 +66,6 @@ exports.performLogin = (req, res) => {
   });
 };
 
-exports.getSignupPage = (req, res) => {
-  res.render(path.join(app.get('views'), 'signup.ejs'), {auth: req.auth});
-};
-
 exports.performSignup = (req, res) => {
   req.body.admin = Boolean(req.body.admin && req.body.admin === 'true');
 
@@ -110,4 +102,25 @@ exports.performSignup = (req, res) => {
           .send(err);
       });
   }
+};
+
+exports.isTokenValid = (req, res) => {
+  return authService.auth(req).then(
+    () => {
+      res
+        .status(CONST.STATUS_CODES.OK.CODE)
+        .json({
+          success: true,
+          message: DICTIONARY.AUTH.SUCCESS
+        });
+    },
+    () => {
+      res
+        .status(CONST.STATUS_CODES.FORBIDDEN.CODE)
+        .json({
+          success: false,
+          message: DICTIONARY.AUTH.WRONG_TOKEN
+        });
+    });
+
 };

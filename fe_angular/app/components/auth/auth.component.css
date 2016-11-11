@@ -1,0 +1,32 @@
+.form {
+  &__item {
+    font-size: 16px;
+    margin-bottom: 10px;
+
+    &-label {
+      margin-bottom: 5px;
+      display: inline-block;
+    }
+
+    &-field {
+      width: 100%;
+      display: block;
+      padding: 5px 10px;
+      border-radius: 5px;
+      height: 30px;
+      line-height: 30px;
+      appearance: none;
+      border: 1px solid #CCC;
+    }
+  }
+
+  &__checkbox {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  &--login {
+    width: 250px;
+    margin: auto;
+  }
+}

@@ -1,0 +1,10 @@
+<div class="info-unit text-center">
+    <p *ngIf="authService.isLoggedIn">Welcome!</p>
+    <p *ngIf="!authService.isLoggedIn">You are not authorized! Please,
+        <a [routerLink]="['/auth/login']">Log in</a> or
+        <a [routerLink]="['/auth/signup']">Sign up</a>.
+    </p>
+
+    <carousel></carousel>
+
+</div>

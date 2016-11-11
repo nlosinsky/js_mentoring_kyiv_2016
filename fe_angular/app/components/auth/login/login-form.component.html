@@ -1,0 +1,19 @@
+<div class="info-unit">
+    <div *ngIf="isVisibleError" class="notification notification__error" >
+        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+        <span>Error:</span>
+        <span class="notification__message">{{message}}</span>
+    </div>
+
+    <form class="form form--login" (ngSubmit)="login()">
+        <div class="form__item">
+            <label class="form__item-label" for="username">Username</label>
+            <input class="form__item-field" type="text" id="username" placeholder="Username" [(ngModel)]="model.username" name="username">
+        </div>
+        <div class="form__item">
+            <label class="form__item-label" for="pass">Password</label>
+            <input class="form__item-field" type="password" id="pass" placeholder="Password" [(ngModel)]="model.password" name="password">
+        </div>
+        <button class="btn btn--primary" type="submit">Submit</button>
+    </form>
+</div>

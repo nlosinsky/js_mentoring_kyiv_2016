@@ -1,0 +1,31 @@
+<header class="header">
+    <nav class="navbar navbar--header">
+        <a [routerLink]="['/']" class="navbar__logo">
+            <i class="navbar__logo-img fa" aria-hidden="true"></i>
+            <span class="navbar__logo-text">Home</span>
+        </a>
+        <div [ngSwitch]="authService.isLoggedIn" class="navbar__menu" (click)="toggleOpen()" [ngClass]="{'navbar__menu--active': isActive}">
+            <ul *ngSwitchCase="true" class="navbar__menu-items">
+                <li class="navbar__menu-item" routerLinkActive="navbar__menu-item--active">
+                    <a class="navbar__menu-link text-grey" [routerLink]="['/tickets/available']">Available Tickets</a>
+                </li>
+                <li class="navbar__menu-item" routerLinkActive="navbar__menu-item--active">
+                    <a class="navbar__menu-link text-grey" [routerLink]="['/tickets/my']">My Tickets</a>
+                </li>
+                <li class="navbar__menu-item" routerLinkActive="navbar__menu-item--active">
+                    <a class="navbar__menu-link text-grey" (click)="authService.logout()">
+                        Log Out <b>({{authService.username}})</b>
+                    </a>
+                </li>
+            </ul>
+            <ul *ngSwitchCase="false" class="navbar__menu-items">
+                <li class="navbar__menu-item" routerLinkActive="navbar__menu-item--active">
+                    <a class="navbar__menu-link text-grey" [routerLink]="['/auth/login']">Log In</a>
+                </li>
+                <li class="navbar__menu-item" routerLinkActive="navbar__menu-item--active">
+                    <a class="navbar__menu-link text-grey" [routerLink]="['/auth/signup']">Sign Up</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>

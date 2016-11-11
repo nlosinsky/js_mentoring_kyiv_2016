@@ -1,12 +1,11 @@
 module.exports = {
   TOKEN: {
     LOCATION: {
-      HEADER: 'x-access-token',
-      COOKIE: 'accessToken'
+      HEADER: 'authorization'
     },
     SECRET: {
-      KEY: 'superSecret',
-      VALUE: 'test-secret'
+      KEY: 'ticketsSecret',
+      VALUE: 'tickets-secret'
     }
   },
 

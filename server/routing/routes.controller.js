@@ -1,9 +1,23 @@
 'use strict';
 
 const path = require('path');
-const app = require('./../app');
-const tmplPath = path.join(app.get('views'), 'index.ejs');
+const authService = require('../services/authStatus');
+const CONST = require('../constants/constants');
+const DICTIONARY = require('../constants/dictionary');
 
-exports.get = (req, res) => {
-  res.render(tmplPath, {auth: req.auth});
+exports.isAuthorized = (req, res, next) => {
+    authService.auth(req).then(
+      (resp) => {
+        req.auth = resp;
+        next();
+      },
+      () => {
+        res
+          .status(CONST.STATUS_CODES.FORBIDDEN.CODE)
+          .json({
+            success: false,
+            message: DICTIONARY.AUTH.WRONG_TOKEN
+          });
+      }
+    );
 };

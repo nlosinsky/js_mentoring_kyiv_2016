@@ -1,26 +1,17 @@
 'use strict';
 
 const path = require('path');
-const routesController = require('./routes.controller.js');
-const authService = require('../services/authStatus');
 const config = require('../config/environment');
 const CONST = require('../constants/constants');
 
 module.exports = (app) => {
-  app.all('*', (req, res, next) => {
-    authService.auth(req).then((resp) => {
-      req.auth = resp;
-      next();
-    });
-  });
-
-  //Home route
-  app.route(routeMiddleware(['', '/']))
-    .get(routesController.get);
-
   //API routes
   app.use(routeMiddleware(['/api']), require('./../api'));
 
+  //Send index file on init
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(process.cwd(), 'dist/index.html'));
+  });
 
   /**
    *

@@ -1,0 +1,57 @@
+.table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  width: 100%;
+
+  &--tickets {
+    ^&__head {
+      white-space: nowrap;
+    }
+  }
+
+  &__head {
+
+  }
+
+  &__row {
+    &--head {
+    }
+  }
+
+  &__cell {
+    border: 1px solid #CCC;
+    padding: 10px;
+    text-align: left;
+
+    &--head {
+      font-weight: bold;
+      background-color: #F0F0F0;
+    }
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 768px) {
+  .table {
+    &-wrapper {
+      max-width: 100%;
+      margin-left: 100px;
+      overflow-x: scroll;
+      overflow-y: visible;
+    }
+
+    &__cell {
+      white-space: nowrap;
+      height: 60px;
+
+      &:first-child {
+        position: absolute;
+        left: 11px;
+        width: 100px;
+        height: 61px;
+        display: inline-flex;
+        align-items: center;
+        padding-top: 8px;
+      }
+    }
+  }
+}

@@ -1,7 +1,19 @@
 # Quick start
 
 1. In a project root run `npm run setup`. It will install all dependencies.
-2. To run the server enter `npm run server:start`. If you want to allow the server monitoring for any changes and automatically restart - run `npm run server:watch`.
-3. According to environment `development` or `production` to build the project you should run `npm run build:dev` or `npm run build:prod` respectively. This also applies to starting `webpack-dev-server`, so just run `npm run start:dev` or `npm run start:prod` and then open a browser at: [http://localhost:3000/webpack-dev-server](http://localhost:3000/webpack-dev-server).
+2. To run an angular application simply enter `npm run app:angular`.
+3. Open a browser at: [http://localhost:3000/webpack-dev-server].
+
+## Main that were implemented in angular
+- all front-end part of angular application is located in `./fe_angular` directory
+- multiple components
+- routing with feature-areas
+- module lazy-loading when go to `/tickets/**` urls
+- `canActivate` and `canLoad` guards on `/tickets/**` urls
+- `resolve` guard when go to `Available tickets` page on `/tickets/available` respectively
+
+  
+
+
  
 

@@ -4,16 +4,11 @@ const CONST = require('../../constants/constants');
 const DICTIONARY = require('../../constants/dictionary');
 
 const app = require('../../app');
-const path = require('path');
 const Kiwi = require('kiwi-api').default;
 const KiwiAPI = new Kiwi();
 const User = require('../../models/user.model.js');
 
 exports.getAvailableTickets = (req, res) => {
-  if (!req.auth.success) {
-    res.redirect('/');
-  }
-
   KiwiAPI.flights({
     limit: 10
   })
@@ -22,14 +17,12 @@ exports.getAvailableTickets = (req, res) => {
       dateFormatter(places.data, 'dTimeUTC');
       dateFormatter(places.data, 'aTimeUTC');
 
-      res.render(
-        path.join(app.get('views'), 'tickets.list.ejs'),
-        {
-          auth: req.auth,
+      res
+        .status(CONST.STATUS_CODES.OK.CODE)
+        .json({
           success: true,
           tickets: places.data
-        }
-      );
+        });
     })
     .catch((err) => {
       res
@@ -39,10 +32,6 @@ exports.getAvailableTickets = (req, res) => {
 };
 
 exports.addUserTicket = (req, res) => {
-  if (!req.auth.success) {
-    res.redirect('/');
-  }
-
   return User
     .findById(req.auth.user._id)
     .then((modelInstance, err) => {
@@ -77,10 +66,6 @@ exports.addUserTicket = (req, res) => {
 };
 
 exports.getUserTickets = (req, res) => {
-  if (!req.auth.success) {
-    res.redirect('/');
-  }
-
   return User
     .findById(req.auth.user._id)
     .then((user, err) => {
@@ -89,14 +74,12 @@ exports.getUserTickets = (req, res) => {
         throw err;
       }
 
-      res.render(
-        path.join(app.get('views'), 'tickets.user.ejs'),
-        {
-          auth: req.auth,
+      res
+        .status(CONST.STATUS_CODES.OK.CODE)
+        .json({
           success: true,
           tickets: user.tickets
-        }
-      );
+        });
     })
     .catch((err) => {
       res
@@ -106,6 +89,7 @@ exports.getUserTickets = (req, res) => {
 };
 
 
+//todo do it on frontend
 /**
  *
  * @param {Object} resp

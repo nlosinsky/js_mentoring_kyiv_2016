@@ -21,10 +21,6 @@ app.set(CONST.TOKEN.SECRET.KEY, config.secret);
 //set path for static resources
 app.use(express.static(path.join(config.root, 'dist')));
 
-//setup template engine settings
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, '../src/views/pages'));
-
 // Setup server
 require('./config/express')(app);
 require('./routing/routes')(app);

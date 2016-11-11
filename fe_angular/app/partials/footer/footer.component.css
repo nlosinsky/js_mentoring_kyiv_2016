@@ -1,0 +1,19 @@
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.social-icons {
+  display: inline-flex;
+
+  &--footer {
+    ^&__icon {
+      color: #777;
+    }
+  }
+
+  &__icon {
+    margin-left: 5px;
+  }
+}

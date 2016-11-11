@@ -1,0 +1,34 @@
+<div *ngIf="isSuccessfullyBought" class="notification notification__success">
+    <i class="fa fa-check-circle" aria-hidden="true"></i>
+    <span class="notification__message">{{message}}</span>
+</div>
+<h2 *ngIf="ticket" class="heading headeing__2">Ticket #{{ticket.id}} details</h2>
+
+<div *ngIf="ticket" class="table-wrapper">
+    <table class="table table--tickets">
+        <thead class="table__head">
+        <tr class="table__row table__row--head">
+            <th class="table__cell table__cell--head">ID</th>
+            <th class="table__cell table__cell--head">From City</th>
+            <th class="table__cell table__cell--head">To City</th>
+            <th class="table__cell table__cell--head">Dispatch / Arrival</th>
+            <th class="table__cell table__cell--head">Distance (km)</th>
+            <th class="table__cell table__cell--head">Duration (min)</th>
+            <th class="table__cell table__cell--head"></th>
+        </tr>
+        </thead>
+        <tbody class="table__body">
+        <tr class="table__row">
+            <th class="table__cell">{{ticket.id}}</th>
+            <td class="table__cell">{{ticket.cityFrom}}</td>
+            <td class="table__cell">{{ticket.cityTo}}</td>
+            <td class="table__cell">{{ticket.dTimeUTC}} / {{ticket.aTimeUTC}}</td>
+            <td class="table__cell">{{ticket.distance}}</td>
+            <td class="table__cell">{{ticket.duration.departure}}</td>
+            <td class="table__cell">
+                <button (click)="buyTicket(ticket)" class="btn btn--success btn--buy-ticket">Buy</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
