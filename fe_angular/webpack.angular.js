@@ -10,7 +10,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 // packages for typescript
-const { ForkCheckerPlugin } = require('awesome-typescript-loader');
+const ForkCheckerPlugin  = require('awesome-typescript-loader').ForkCheckerPlugin;
 
 //Packages for styles
 const precss = require('precss');
