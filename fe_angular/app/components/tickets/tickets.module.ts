@@ -6,7 +6,7 @@ import { AvailableTicketsComponent } from './available/available-tickets.compone
 import { TicketsService } from '../../services/tickets.service';
 import { MyTicketsComponent } from './my/my-tickets.component';
 import { TicketDetailsComponent } from './detail/ticket-details.component';
-import { TicketComponent } from "./ticket.component";
+import { TicketComponent } from './ticket.component';
 
 import { ticketsRouting } from './tickets.routes';
 

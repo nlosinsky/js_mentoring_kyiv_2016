@@ -2,19 +2,19 @@ import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginFormComponent } from './login/login-form.component';
 import { SignupFormComponent } from './signup/signup-form.component';
-import {CanLoadGuard} from "../../guards/can-load.guard";
+import { RoutesPathConstant } from '../../constants/routes.constant';
 
 
 const authRoutes: Routes = [
     {
-        path: 'auth',
+        path: RoutesPathConstant.AUTH.PATH,
         children: [
             {
-                path: 'login',
+                path: RoutesPathConstant.AUTH.LOGIN.PATH,
                 component: LoginFormComponent
             },
             {
-                path: 'signup',
+                path: RoutesPathConstant.AUTH.SIGNUP.PATH,
                 component: SignupFormComponent
             }
         ]

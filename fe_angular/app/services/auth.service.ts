@@ -1,69 +1,53 @@
 import { Injectable } from '@angular/core';
-import { AuthHttp } from 'angular2-jwt';
-import { Response} from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { Router } from '@angular/router';
 
-import 'rxjs/add/operator/map';
-
 import { Login } from '../models/login.model';
 import { Signup } from '../models/signup.model';
+import { RestService } from './rest.service';
 
 @Injectable()
 export class AuthService {
     public isLoggedIn: boolean = false;
-    public username: string;
     public redirectUrl: String;
+    private username: string;
     private loginPath = '/api/auth/login';
     private signupPath = '/api/auth/signup';
     private checkPath = '/api/auth/check';
 
     constructor(
-        private authHttp: AuthHttp,
+        private rest: RestService,
         private router: Router
     ) {
-        if (this.getToken() && this.getUsername()) {
+        if (this.getToken()) {
             this.isTokenValid();
-            this.username = this.getUsername();
         }
     }
 
     isTokenValid(): Promise<any> {
-        return this.authHttp.get(this.checkPath)
-            .map((res: Response) => res.json())
+        return this.rest.get(this.checkPath)
             .toPromise()
             .then(
-                data => this.isLoggedIn = data.success,
-                error => {
-                    let err = error.json();
-                    this.isLoggedIn = err.success;
-                }
+                ({success}) => this.isLoggedIn = success,
+                () => this.isLoggedIn = false
             );
     }
 
-    login(body: Login): Observable<Response> {
-        return this.authHttp.post(this.loginPath, body)
-            .map((res: Response) => {
-                let data = res.json();
-
-                this.isLoggedIn = data.success;
-                this.setToken(data.token);
+    login(body: Login): Observable<void> {
+        return this.rest.post(this.loginPath, body)
+            .map(({success, token}) => {
+                this.isLoggedIn = success;
+                this.setToken(token);
                 this.setUsername(body.username);
-
-                return data;
             });
     }
 
-    signup(body: Signup): Observable<Response> {
-        return this.authHttp.post(this.signupPath, body)
-            .map((res: Response) => {
-                let data = res.json();
-
-                this.isLoggedIn = data.success;
-                this.setToken(data.token);
+    signup(body: Signup): Observable<void> {
+        return this.rest.post(this.signupPath, body)
+            .map(({success, token}) => {
+                this.isLoggedIn = success;
+                this.setToken(token);
                 this.setUsername(body.username);
-
-                return data;
             })
 
     }

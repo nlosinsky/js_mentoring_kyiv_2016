@@ -19,6 +19,6 @@ export class MyTicketsComponent implements OnInit{
 
     getMyTickets():void {
         this.ticketsService.getUserTickets()
-            .subscribe(data => this.tickets = data.tickets);
+            .subscribe(({tickets}) => this.tickets = tickets);
     }
 }

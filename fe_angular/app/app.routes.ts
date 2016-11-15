@@ -4,24 +4,24 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { CanLoadGuard } from './guards/can-load.guard';
+import { RoutesPathConstant } from './constants/routes.constant';
 
 const appRoutes: Routes = [
-    //todo maybe routes have 'name' parameter???
     {
-        path: '',
+        path: RoutesPathConstant.ROOT.PATH,
         component: HomeComponent
     },
     {
-        path: 'home',
+        path: RoutesPathConstant.HOME.PATH,
         component: HomeComponent
     },
     {
-        path: 'tickets',
+        path: RoutesPathConstant.TICKETS.PATH,
         loadChildren: './components/tickets/tickets.module#TicketsModule',
         canLoad: [ CanLoadGuard ]
     },
     {
-        path: '**',
+        path: RoutesPathConstant.PAGE_NOT_FOUND.PATH,
         component: PageNotFoundComponent
     }
 ];

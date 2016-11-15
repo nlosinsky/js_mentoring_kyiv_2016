@@ -19,30 +19,24 @@ export class TicketDetailsComponent implements OnInit{
     ) { }
 
     ngOnInit() {
-        this.route.params.subscribe(params => {
-            let id = +params['id'];
-
-            this.getTicket(id);
+        this.route.params.subscribe(({id}) => {
+            this.getTicket(+id);
         });
     }
 
-    getTicket(id: number):void {
+    getTicket(ticketId: number): void {
         this.ticketsService.getAvailableTickets()
             .subscribe(
-                data => {
-                    this.ticket = data.tickets.filter(ticket => {
-                        return +ticket.id === id;
-                    })[0];
-                }
+                ({tickets}) => this.ticket = tickets.find(({id}) => +id === ticketId)
             );
     }
 
     buyTicket(ticket: Ticket): void {
         this.ticketsService.buyTicket(ticket)
             .subscribe(
-                (data) => {
-                    this.isSuccessfullyBought = data.success;
-                    this.message = data.message;
+                ({success, message}) => {
+                    this.isSuccessfullyBought = success;
+                    this.message = message;
 
                     setTimeout(() => {
                         this.isSuccessfullyBought = false;

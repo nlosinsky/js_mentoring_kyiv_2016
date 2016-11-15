@@ -9,7 +9,7 @@ const KiwiAPI = new Kiwi();
 const User = require('../../models/user.model.js');
 
 exports.getAvailableTickets = (req, res) => {
-  KiwiAPI.flights({
+  return KiwiAPI.flights({
     limit: 10
   })
     .then((places) => {
@@ -27,7 +27,10 @@ exports.getAvailableTickets = (req, res) => {
     .catch((err) => {
       res
         .status(CONST.STATUS_CODES.SERVER_ERROR.CODE)
-        .send(err);
+        .json({
+          message: err,
+          success: false
+        });
     });
 };
 

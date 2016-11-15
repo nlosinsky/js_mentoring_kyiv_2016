@@ -14,7 +14,19 @@ export class HeaderComponent {
         private authService: AuthService
     ) { }
 
+    get username(): string {
+        return this.authService.getUsername();
+    }
+
+    get isLoggedIn(): boolean {
+        return this.authService.isLoggedIn;
+    }
+
     toggleOpen():void {
         this.isActive = !this.isActive;
+    }
+
+    logout():void {
+        this.authService.logout();
     }
 }

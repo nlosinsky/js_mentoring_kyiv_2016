@@ -6,6 +6,7 @@ import { TicketDetailsComponent } from './detail/ticket-details.component';
 import { TicketComponent } from './ticket.component';
 import { AuthGuard } from '../../guards/auth.guard';
 import { TicketsResolver } from '../../guards/tickets.resolve';
+import { RoutesPathConstant } from '../../constants/routes.constant';
 
 const ticketsRoutes: Routes = [
     {
@@ -14,18 +15,18 @@ const ticketsRoutes: Routes = [
         canActivate:[ AuthGuard ],
         children: [
             {
-                path: 'available',
+                path: RoutesPathConstant.TICKETS.AVAILABLE.PATH,
                 component: AvailableTicketsComponent,
                 resolve: {
                     tickets: TicketsResolver
                 }
             },
             {
-                path: 'my',
+                path: RoutesPathConstant.TICKETS.MY.PATH,
                 component: MyTicketsComponent
             },
             {
-                path: 'detail/:id',
+                path: RoutesPathConstant.TICKETS.DETAIL_ID.PATH,
                 component: TicketDetailsComponent
 
             }

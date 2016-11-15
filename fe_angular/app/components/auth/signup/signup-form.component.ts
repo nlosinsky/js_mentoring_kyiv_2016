@@ -26,10 +26,10 @@ export class SignupFormComponent {
                 error => {
                     if (!error.json) return;
 
-                    let err = error.json();
+                    let { success, message } = error.json();
 
-                    this.isVisibleError = !err.success;
-                    this.message = err.message;
+                    this.isVisibleError = !success;
+                    this.message = message;
 
                     setTimeout(() => {
                         this.isVisibleError = false;

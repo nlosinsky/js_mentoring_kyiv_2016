@@ -99,7 +99,10 @@ exports.performSignup = (req, res) => {
       .catch((err) => {
         res
           .status(CONST.STATUS_CODES.SERVER_ERROR.CODE)
-          .send(err);
+          .json({
+            error: err,
+            success: false
+          });
       });
   }
 };

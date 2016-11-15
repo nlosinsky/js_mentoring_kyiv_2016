@@ -20,6 +20,7 @@ import { TicketsResolver } from './guards/tickets.resolve';
 import { AuthModule } from './components/auth/auth.module';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { CanLoadGuard } from './guards/can-load.guard';
+import { RestService } from './services/rest.service';
 
 @NgModule({
     imports: [
@@ -52,7 +53,8 @@ import { CanLoadGuard } from './guards/can-load.guard';
         }),
         AuthGuard,
         TicketsResolver,
-        CanLoadGuard
+        CanLoadGuard,
+        RestService
     ],
     bootstrap: [ AppComponent ]
 })

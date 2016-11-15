@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import { Ticket } from "../models/ticket.model";
-import { AuthHttp } from 'angular2-jwt';
-
-import 'rxjs/add/operator/map';
+import { Ticket } from '../models/ticket.model';
+import { RestService } from './rest.service';
 
 @Injectable()
 export class TicketsService {
@@ -12,21 +9,18 @@ export class TicketsService {
     myTicketsPath = '/api/tickets/my';
 
     constructor(
-        private authHttp: AuthHttp
+        private rest: RestService
     ) { }
 
     getAvailableTickets(): Observable<any> {
-        return this.authHttp.get(this.availableTicketsPath)
-            .map((res: Response) => res.json());
+        return this.rest.get(this.availableTicketsPath);
     }
 
     getUserTickets():Observable<any> {
-        return this.authHttp.get(this.myTicketsPath)
-            .map((res: Response) => res.json());
+        return this.rest.get(this.myTicketsPath);
     }
 
     buyTicket(ticket: Ticket): Observable<any> {
-        return this.authHttp.put(this.availableTicketsPath, ticket)
-            .map((res: Response) => res.json());
+        return this.rest.put(this.availableTicketsPath, ticket);
     }
 }

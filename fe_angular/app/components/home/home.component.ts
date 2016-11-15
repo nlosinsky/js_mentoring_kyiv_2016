@@ -9,4 +9,9 @@ export class HomeComponent {
     constructor(
         private authService: AuthService
     ) { }
+
+    get isLoggedIn(): boolean {
+        return this.authService.isLoggedIn;
+    }
+
 }
