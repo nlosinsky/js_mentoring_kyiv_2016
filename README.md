@@ -2,7 +2,7 @@
 
 1. In a project root run `npm run setup`. It will install all dependencies.
 2. To run an angular application simply enter `npm run app:angular`.
-3. Open a browser at: [http://localhost:3000/webpack-dev-server].
+3. Open a browser at: [http://localhost:9000].
 
 ## Main that were implemented in angular
 - all front-end part of angular application is located in `./fe_angular` directory
