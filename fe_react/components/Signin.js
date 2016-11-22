@@ -37,48 +37,49 @@ class Signin extends Component {
     super(props);
 
     this.state = {
-      email: {
-        isValid: true,
-        value: '',
-        required: true
+      fields: {
+        email: {
+          isValid: true,
+          value: '',
+          required: true
+        },
+        password: {
+          isValid: true,
+          value: '',
+          required: true
+        }
       },
-      password: {
-        isValid: true,
-        value: '',
-        required: true
-      }
+      inProgress: false,
+      isFormValid: false
     };
-
-    this.isFormValid = false;
-    this.inProgress = false;
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange({target}, fieldObj) {
-    let state = {...this.state};
+    let state = {...this.state.fields};
 
     for (let key of Object.keys(state)) {
       state[key] = {...state[key], ...fieldObj[key]};
     }
 
-    this.isFormValid = true;
+    let isFormValid = true;
     for (let key of Object.keys(state)) {
       if (!state[key].isValid) {
-        this.isFormValid = false;
+        isFormValid = false;
         break;
       }
 
       if (state[key].required && !state[key].value) {
-        this.isFormValid = false;
+        isFormValid = false;
         break;
       }
     }
 
-    this.setState({
-      [target.name]: state[target.name]
-    });
+    let fields = {...state, ...{[target.name]: state[target.name]}};
+
+    this.setState({fields, isFormValid});
   }
 
   getValidationPattern(type) {
@@ -92,9 +93,10 @@ class Signin extends Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    let { email, password } = this.state;
+    let { email, password } = this.state.fields;
 
-    this.inProgress = true;
+
+    this.setState({inProgress: true});
     this.props.authUser(email.value, password.value);
   }
 
@@ -104,7 +106,7 @@ class Signin extends Component {
     }
 
     if(user.name || user.error) {
-      this.inProgress = false;
+      this.setState({inProgress: false});
     }
   }
 
@@ -118,25 +120,25 @@ class Signin extends Component {
 
         <form style={styles.sub} onSubmit={this.handleSubmit} noValidate>
           <TextInput
-            value={this.state.email.value}
+            value={this.state.fields.email.value}
             style={styles.input}
             onChange={this.handleChange}
             name="email"
             hintText="Email"
             type="email"
             pattern={this.getValidationPattern('email')}
-            errorPatternText="Wrong Email"
-            required={this.state.email.required}
+            errorValidationText="Wrong Email"
+            required={this.state.fields.email.required}
             debounce={200}
           />
           <TextInput
-            value={this.state.password.value}
+            value={this.state.fields.password.value}
             style={styles.input}
             onChange={this.handleChange}
             hintText="Password"
             name="password"
             type="password"
-            required={this.state.password.required}
+            required={this.state.fields.password.required}
             minLength={6}
             debounce={200}
           />
@@ -145,7 +147,7 @@ class Signin extends Component {
               label="Submit"
               primary={true}
               type="submit"
-              disabled={!this.isFormValid || this.inProgress}
+              disabled={!this.state.isFormValid || this.state.inProgress}
             />
             <RaisedButton
               containerElement={<Link to='/forgot-password'/>}

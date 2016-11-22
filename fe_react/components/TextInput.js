@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TextField from 'material-ui/TextField';
+import * as isEmail from 'email-validator';
 
 export class TextInput extends Component {
   constructor(props) {
@@ -43,18 +44,20 @@ export class TextInput extends Component {
 
   performValidation(value) {
     let { errorText, required: isRequired } = this.state;
-    let { regexp, minLength, errorPatternText } = this.props;
+    let { regexp, minLength, errorValidationText } = this.props;
 
     if (isRequired) {
       value = value.trim();
       errorText = '';
 
-      if (!this.hasValue(value)) {
+      if (!value) {
         errorText = 'This field is required'
       }
 
-      if (regexp && !regexp.test(value)) {
-        errorText = errorPatternText;
+      if (this.props.type === 'email' && !isEmail.validate(value)) {
+        errorText = errorValidationText;
+      } else if (regexp && !regexp.test(value)) {
+        errorText = errorValidationText;
       }
 
       if (minLength && value.length < minLength) {
@@ -65,10 +68,6 @@ export class TextInput extends Component {
     this.setState({errorText});
 
     return (errorText.length === 0);
-  }
-
-  hasValue(value) {
-    return value !== '' && value !== undefined && value !== null;
   }
 
   render() {
