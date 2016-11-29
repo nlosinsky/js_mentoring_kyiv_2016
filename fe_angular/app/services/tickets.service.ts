@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
+
 import { Ticket } from '../models/ticket.model';
 import { RestService } from './rest.service';
+import { EndpointsConstant } from '../constants/endpoints.constant';
 
 @Injectable()
 export class TicketsService {
-    availableTicketsPath = '/api/tickets/available';
-    myTicketsPath = '/api/tickets/my';
+    availableTicketsPath = EndpointsConstant.TICKETS.AVAILABLE;
+    myTicketsPath = EndpointsConstant.TICKETS.MY;
 
     constructor(
         private rest: RestService

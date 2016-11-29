@@ -5,15 +5,16 @@ import { Router } from '@angular/router';
 import { Login } from '../models/login.model';
 import { Signup } from '../models/signup.model';
 import { RestService } from './rest.service';
+import { EndpointsConstant } from '../constants/endpoints.constant';
 
 @Injectable()
 export class AuthService {
     public isLoggedIn: boolean = false;
     public redirectUrl: String;
     private username: string;
-    private loginPath = '/api/auth/login';
-    private signupPath = '/api/auth/signup';
-    private checkPath = '/api/auth/check';
+    private loginPath = EndpointsConstant.AUTH.LOGIN;
+    private signupPath = EndpointsConstant.AUTH.SIGNUP;
+    private checkPath = EndpointsConstant.AUTH.CHECK;
 
     constructor(
         private rest: RestService,

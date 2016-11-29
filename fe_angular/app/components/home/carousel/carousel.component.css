@@ -49,6 +49,7 @@
     & button {
       visibility: visible;
       cursor: pointer;
+      background-color: #CCCCCC;
     }
 
     ^&__nav {

@@ -85,6 +85,9 @@
     border-left: 0;
     border-right: 0;
     border-radius: 0;
+    display: block;
+    padding-top: 30px;
+    height: auto;
 
     &__logo {
       &-img {
@@ -94,6 +97,7 @@
       }
     }
     &__menu {
+     float: right;
 
       &:before {
         font-family: 'FontAwesome';
@@ -112,7 +116,7 @@
         left: 0;
         right: 0;
         background-color: #F0F0F0;
-        top: 34px;
+        top: 67px;
         border-bottom: 1px solid #999;
         z-index: 10;
       }
@@ -120,7 +124,7 @@
       &-item {
         font-size: 22px;
         line-height: 40px;
-        padding: 10px 20px;
+        padding: 0;
         margin: 0;
         border-radius:0;
         border-color: #999;
@@ -128,6 +132,10 @@
         border-width: 1px 0 0 0 ;
       }
 
+      &-link {
+        padding: 10px 20px;
+         display: block;
+      }
     }
   }
 }

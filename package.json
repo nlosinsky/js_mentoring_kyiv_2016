@@ -14,8 +14,10 @@
     "fe-build:react": "cross-env NODE_ENV=production FRONT_END=react webpack",
     "server:start": "node server/app.js",
     "server:watch": "nodemon server/app.js",
+    "copy:cordova:files": "cd cordova_app/www/ && rm -rf * && cp ../../dist/* .",
     "app:angular": "npm run fe-build:angular && npm run server:start",
-    "app:react": "npm run fe-build:react && npm run server:start"
+    "app:react": "npm run fe-build:react && npm run server:start",
+    "app:cordova": "npm run fe-build:angular && npm run copy:cordova:files && cd cordova_app/ && cordova run ios && cd .."
   },
   "repository": {
     "type": "git",
@@ -25,7 +27,7 @@
   "license": "ISC",
   "dependencies": {
     "@angular/common": "2.1.2",
-    "@angular/compiler": "2.1.2",
+    "@angular/compiler": "2.1.1",
     "@angular/core": "2.1.1",
     "@angular/forms": "2.1.2",
     "@angular/http": "2.1.1",
@@ -45,6 +47,7 @@
     "eslint-plugin-react": "6.7.1",
     "express": "4.14.0",
     "font-awesome": "4.6.3",
+    "intl": "^1.2.5",
     "jsonwebtoken": "7.1.9",
     "kiwi-api": "0.3.0",
     "lodash": "4.17.2",

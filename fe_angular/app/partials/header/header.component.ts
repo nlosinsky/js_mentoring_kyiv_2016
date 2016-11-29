@@ -26,6 +26,10 @@ export class HeaderComponent {
         this.isActive = !this.isActive;
     }
 
+    close():void {
+        this.isActive = false;
+    }
+
     logout():void {
         this.authService.logout();
     }

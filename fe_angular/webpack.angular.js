@@ -87,7 +87,7 @@ module.exports = {
       precss,
       postcssFocus(),
       cssnext({
-        browsers: ['last 5 versions', 'IE > 10'],
+        browsers: ['last 10 versions', 'IE > 10'],
       }),
       postcssReporter({
         clearMessages: true,
