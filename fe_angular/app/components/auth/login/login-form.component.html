@@ -1,10 +1,4 @@
 <div class="info-unit">
-    <div *ngIf="isVisibleError" class="notification notification__error" >
-        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-        <span>Error:</span>
-        <span class="notification__message">{{message}}</span>
-    </div>
-
     <form class="form form--login" (ngSubmit)="login()">
         <div class="form__item">
             <label class="form__item-label" for="username">Username</label>

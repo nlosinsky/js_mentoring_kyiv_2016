@@ -21,6 +21,7 @@ import { AuthModule } from './components/auth/auth.module';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { CanLoadGuard } from './guards/can-load.guard';
 import { RestService } from './services/rest.service';
+import { CordovaToastService } from './services/cordova/toast.service';
 
 @NgModule({
     imports: [
@@ -48,13 +49,17 @@ import { RestService } from './services/rest.service';
             headerPrefix: 'Bearer',
             tokenName: 'token_id',
             tokenGetter: (() => localStorage.getItem('token_id')),
-            globalHeaders: [{ 'Content-Type': 'application/json' }],
+            globalHeaders: [
+                {'Content-Type': 'application/json'},
+                {'Accept': 'application/vnd.heroku+json; version=3'}
+            ],
             noJwtError: true
         }),
         AuthGuard,
         TicketsResolver,
         CanLoadGuard,
-        RestService
+        RestService,
+        CordovaToastService
     ],
     bootstrap: [ AppComponent ]
 })

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { AuthService } from '../../../services/auth.service';
 import { Login } from '../../../models/login.model';
+import { CordovaToastService } from '../../../services/cordova/toast.service';
 
 @Component({
     selector: 'login-form',
@@ -10,12 +11,11 @@ import { Login } from '../../../models/login.model';
 })
 export class LoginFormComponent {
     private model: Login = new Login(null, null);
-    private isVisibleError: boolean = false;
-    private message: String;
 
     constructor(
         private authService: AuthService,
-        private router: Router
+        private router: Router,
+        private cordovaToast: CordovaToastService
     ) { }
 
     login(): void {
@@ -26,14 +26,9 @@ export class LoginFormComponent {
                 error => {
                     if (!error.json) return;
 
-                    let { success, message } = error.json();
+                    let { message } = error.json();
 
-                    this.isVisibleError = !success;
-                    this.message = message;
-
-                    setTimeout(() => {
-                        this.isVisibleError = false;
-                    }, 3000);
+                    this.cordovaToast.showError(message);
                 }
             )
     }

@@ -3,19 +3,19 @@ import { TicketsService } from '../../../services/tickets.service';
 import { Ticket } from '../../../models/ticket.model';
 
 import { ActivatedRoute } from '@angular/router';
+import { CordovaToastService } from '../../../services/cordova/toast.service';
 
 @Component({
     selector: 'ticket-details',
     templateUrl: './ticket-details.component.html'
 })
 export class TicketDetailsComponent implements OnInit{
-    isSuccessfullyBought: boolean = false;
     ticket: Ticket;
-    message: String;
 
     constructor(
         private ticketsService: TicketsService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private cordovaToast: CordovaToastService
     ) { }
 
     ngOnInit() {
@@ -34,14 +34,7 @@ export class TicketDetailsComponent implements OnInit{
     buyTicket(ticket: Ticket): void {
         this.ticketsService.buyTicket(ticket)
             .subscribe(
-                ({success, message}) => {
-                    this.isSuccessfullyBought = success;
-                    this.message = message;
-
-                    setTimeout(() => {
-                        this.isSuccessfullyBought = false;
-                    }, 3000);
-                }
+                ({ message }) => this.cordovaToast.showSuccess(message)
             )
     }
 }

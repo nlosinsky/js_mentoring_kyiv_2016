@@ -1,10 +1,10 @@
 {
   "presets": [
     "es2015",
-    "react",
-    "stage-1"
+    "stage-0"
   ],
   "plugins": [
-    "react-hot-loader/babel"
-  ]
+    ["transform-strict-mode", { "strict": true }]
+  ],
+  "compact": "false"
 }

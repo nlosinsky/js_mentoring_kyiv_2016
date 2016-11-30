@@ -1,4 +1,4 @@
-const HOST = 'https://js-mp-2016.herokuapp.com';
+const HOST = 'https://js-mp.herokuapp.com';
 
 export const EndpointsConstant = {
     AUTH: {
