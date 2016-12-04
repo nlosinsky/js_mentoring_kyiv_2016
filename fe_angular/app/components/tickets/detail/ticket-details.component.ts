@@ -20,14 +20,14 @@ export class TicketDetailsComponent implements OnInit{
 
     ngOnInit() {
         this.route.params.subscribe(({id}) => {
-            this.getTicket(+id);
+            this.getTicket(id);
         });
     }
 
-    getTicket(ticketId: number): void {
+    getTicket(ticketId: string): void {
         this.ticketsService.getAvailableTickets()
             .subscribe(
-                ({tickets}) => this.ticket = tickets.find(({id}) => +id === ticketId)
+                ({tickets}) => this.ticket = tickets.find(({id}) => id === ticketId)
             );
     }
 

@@ -19,7 +19,7 @@ export class CordovaToastService {
         });
     }
 
-    showSuccess(message): void {
+    showSuccess(message: string): void {
         window.plugins.toast.showWithOptions({
             message,
             duration: 'short',
