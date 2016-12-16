@@ -12,3 +12,5 @@ import 'rxjs';
 //Other vendors
 import 'normalize.css/normalize.css';
 import 'font-awesome/css/font-awesome.css';
+
+import 'fabric';

@@ -4,7 +4,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Ticket } from '../../../models/ticket.model';
 
 @Component({
-    selector: 'available-tickets',
     templateUrl: './available-tickets.component.html'
 })
 export class AvailableTicketsComponent implements OnInit{

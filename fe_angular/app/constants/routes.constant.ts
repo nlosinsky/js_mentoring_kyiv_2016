@@ -26,6 +26,12 @@ export const RoutesPathConstant = {
             PATH: 'signup'
         }
     },
+    PROFILE: {
+        PATH: 'profile',
+        AVATAR: {
+            PATH: 'avatar'
+        }
+    },
     PAGE_NOT_FOUND: {
         PATH: '**'
     }

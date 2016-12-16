@@ -5,7 +5,6 @@ import { AuthService } from '../../../services/auth.service';
 import { Login } from '../../../models/login.model';
 
 @Component({
-    selector: 'login-form',
     templateUrl: './login-form.component.html'
 })
 export class LoginFormComponent {

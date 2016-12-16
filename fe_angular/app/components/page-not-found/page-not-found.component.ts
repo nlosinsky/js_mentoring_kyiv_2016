@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'page-nit-fonund',
     templateUrl: 'page-not-found.component.html'
 })
 export class PageNotFoundComponent implements OnInit {

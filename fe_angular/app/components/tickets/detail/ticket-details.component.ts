@@ -5,7 +5,6 @@ import { Ticket } from '../../../models/ticket.model';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-    selector: 'ticket-details',
     templateUrl: './ticket-details.component.html'
 })
 export class TicketDetailsComponent implements OnInit{

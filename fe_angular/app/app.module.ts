@@ -21,6 +21,7 @@ import { AuthModule } from './components/auth/auth.module';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { CanLoadGuard } from './guards/can-load.guard';
 import { RestService } from './services/rest.service';
+import { ProfileModule } from './components/profile/profile.module';
 
 @NgModule({
     imports: [
@@ -54,7 +55,8 @@ import { RestService } from './services/rest.service';
         AuthGuard,
         TicketsResolver,
         CanLoadGuard,
-        RestService
+        RestService,
+        ProfileModule
     ],
     bootstrap: [ AppComponent ]
 })

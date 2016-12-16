@@ -5,7 +5,6 @@ import { AuthService } from '../../../services/auth.service';
 import { Signup} from '../../../models/signup.model';
 
 @Component({
-    selector: 'signup-form',
     templateUrl: './signup-form.component.html'
 })
 export class SignupFormComponent {

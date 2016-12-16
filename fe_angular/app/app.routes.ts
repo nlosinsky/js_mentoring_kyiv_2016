@@ -21,6 +21,11 @@ const appRoutes: Routes = [
         canLoad: [ CanLoadGuard ]
     },
     {
+        path: RoutesPathConstant.PROFILE.PATH,
+        loadChildren: './components/profile/profile.module#ProfileModule',
+        canLoad: [ CanLoadGuard ]
+    },
+    {
         path: RoutesPathConstant.PAGE_NOT_FOUND.PATH,
         component: PageNotFoundComponent
     }

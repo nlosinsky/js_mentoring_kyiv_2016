@@ -1,0 +1,28 @@
+<div class="avatar-constructor">
+    <div class="avatar-constructor__main">
+        <canvas id="canvas" width="500" height="500"></canvas>
+        <button class="button button--green" (click)="downloadAvatar()">Download Avatar</button>
+        <button class="button button--red" (click)="runAnimation()">Run Animation</button>
+    </div>
+
+    <div class="avatar-pane avatar-constructor__pane">
+        <ul class="avatar-pane__nav">
+            <li *ngFor="let tab of tabs"
+                (click)="setTab(tab)"
+                [ngClass]="{'avatar-pane__item--active': isActiveTab(tab)}"
+                class="avatar-pane__button"
+                >
+                    {{tab | uppercase}}
+            </li>
+        </ul>
+        <div class="avatar-pane__content">
+            <div *ngFor="let part of parts"
+                class="avatar-pane__item"
+                (click)="changePart(part)"
+                [ngClass]="{'avatar-pane__item--active': isActivePart(part)}"
+            >
+                <img src="{{part}}" alt="">
+            </div>
+        </div>
+    </div>
+</div>
