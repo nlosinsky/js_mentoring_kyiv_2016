@@ -7,6 +7,7 @@ import { TicketComponent } from './ticket.component';
 import { AuthGuard } from '../../guards/auth.guard';
 import { TicketsResolver } from '../../guards/tickets.resolve';
 import { RoutesPathConstant } from '../../constants/routes.constant';
+import { TicketsStatisticsComponent } from './statistics/tickets-statistics.component';
 
 const ticketsRoutes: Routes = [
     {
@@ -28,6 +29,11 @@ const ticketsRoutes: Routes = [
             {
                 path: RoutesPathConstant.TICKETS.DETAIL_ID.PATH,
                 component: TicketDetailsComponent
+
+            },
+            {
+                path: RoutesPathConstant.TICKETS.STATISTICS.PATH,
+                component: TicketsStatisticsComponent
 
             }
         ]

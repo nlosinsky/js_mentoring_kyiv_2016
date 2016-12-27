@@ -13,7 +13,7 @@ import { HomeComponent } from './components/home';
 
 import { routes } from './app.routes';
 import { AuthService } from './services/auth.service';
-import { CarouselComponent } from './components/home/carousel/carousel.component';
+import { CarouselComponent } from './components/shared/carousel/carousel.component';
 import { TicketsModule } from './components/tickets/tickets.module';
 import { AuthGuard } from './guards/auth.guard';
 import { TicketsResolver } from './guards/tickets.resolve';
@@ -30,6 +30,7 @@ import { ProfileModule } from './components/profile/profile.module';
         FormsModule,
         HttpModule,
         TicketsModule,
+        ProfileModule,
         AuthModule,
         routes
     ],
@@ -55,8 +56,7 @@ import { ProfileModule } from './components/profile/profile.module';
         AuthGuard,
         TicketsResolver,
         CanLoadGuard,
-        RestService,
-        ProfileModule
+        RestService
     ],
     bootstrap: [ AppComponent ]
 })

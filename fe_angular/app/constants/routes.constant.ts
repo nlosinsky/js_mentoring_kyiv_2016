@@ -15,6 +15,9 @@ export const RoutesPathConstant = {
         },
         DETAIL_ID: {
             PATH: 'detail/:id',
+        },
+        STATISTICS: {
+            PATH: 'statistics'
         }
     },
     AUTH: {

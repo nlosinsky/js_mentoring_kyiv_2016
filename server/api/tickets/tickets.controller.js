@@ -9,9 +9,11 @@ const KiwiAPI = new Kiwi();
 const User = require('../../models/user.model.js');
 
 exports.getAvailableTickets = (req, res) => {
-  return KiwiAPI.flights({
+  const options = Object.assign({
     limit: 10
-  })
+  }, req.query);
+
+  return KiwiAPI.flights(options)
     .then((places) => {
 
       dateFormatter(places.data, 'dTimeUTC');

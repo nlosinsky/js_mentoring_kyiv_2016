@@ -12,8 +12,8 @@
             <th class="table__cell table__cell--head">From City</th>
             <th class="table__cell table__cell--head">To City</th>
             <th class="table__cell table__cell--head">Dispatch / Arrival</th>
-            <th class="table__cell table__cell--head">Distance (km)</th>
-            <th class="table__cell table__cell--head">Duration (min)</th>
+            <th class="table__cell table__cell--head">Duration</th>
+            <th class="table__cell table__cell--head">Price (EUR)</th>
             <th class="table__cell table__cell--head"></th>
         </tr>
         </thead>
@@ -23,8 +23,8 @@
             <td class="table__cell">{{ticket.cityFrom}}</td>
             <td class="table__cell">{{ticket.cityTo}}</td>
             <td class="table__cell">{{ticket.dTimeUTC}} / {{ticket.aTimeUTC}}</td>
-            <td class="table__cell">{{ticket.distance}}</td>
-            <td class="table__cell">{{ticket.duration.departure}}</td>
+            <td class="table__cell">{{ticket.fly_duration}}</td>
+            <td class="table__cell">{{ticket.price}}</td>
             <td class="table__cell">
                 <button (click)="buyTicket(ticket)" class="btn btn--success btn--buy-ticket">Buy</button>
             </td>

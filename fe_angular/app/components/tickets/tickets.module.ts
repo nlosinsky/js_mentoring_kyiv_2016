@@ -7,6 +7,9 @@ import { TicketsService } from '../../services/tickets.service';
 import { MyTicketsComponent } from './my/my-tickets.component';
 import { TicketDetailsComponent } from './detail/ticket-details.component';
 import { TicketComponent } from './ticket.component';
+import { TicketsStatisticsComponent } from './statistics/tickets-statistics.component';
+import { BarchartComponent } from '../shared/charts/barchart/barchart.component';
+import { BubbleComponent } from '../shared/charts/bubblechart/bubblechart.component';
 
 import { ticketsRouting } from './tickets.routes';
 
@@ -21,7 +24,10 @@ import { ticketsRouting } from './tickets.routes';
         TicketComponent,
         AvailableTicketsComponent,
         MyTicketsComponent,
-        TicketDetailsComponent
+        TicketDetailsComponent,
+        TicketsStatisticsComponent,
+        BarchartComponent,
+        BubbleComponent
     ],
     providers: [
         TicketsService

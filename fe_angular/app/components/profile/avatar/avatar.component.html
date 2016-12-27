@@ -9,7 +9,7 @@
         <ul class="avatar-pane__nav">
             <li *ngFor="let tab of tabs"
                 (click)="setTab(tab)"
-                [ngClass]="{'avatar-pane__item--active': isActiveTab(tab)}"
+                [ngClass]="{'avatar-pane__button--active': isActiveTab(tab)}"
                 class="avatar-pane__button"
                 >
                     {{tab | uppercase}}

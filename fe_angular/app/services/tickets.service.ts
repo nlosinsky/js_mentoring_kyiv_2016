@@ -14,8 +14,17 @@ export class TicketsService {
         private rest: RestService
     ) { }
 
-    getAvailableTickets(): Observable<any> {
-        return this.rest.get(this.availableTicketsPath);
+    getAvailableTickets(params?): Observable<any> {
+        let options = {
+            limit: 10
+        };
+
+        Object.assign(options, params);
+
+        const query = Object.keys(options).map((option) => `${option}=${options[option]}`).join('&');
+        const url = `${this.availableTicketsPath}?${query}`;
+
+        return this.rest.get(url);
     }
 
     getUserTickets():Observable<any> {
